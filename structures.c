@@ -1,15 +1,12 @@
+#include <stdlib.h>
+#include <stddef.h>
+
 struct StackNode{
   int value;
   struct StackNode* next;
 };
 
-void clamp(int *value, int min, int max){
-  if(*value < min) *value = min;
-  else if(*value > max) *value = max;
-}
-
 void push(struct StackNode** root, int value){
-  clamp(&value, 0, 255);
   struct StackNode* newNode = (struct StackNode*)(malloc(sizeof(struct StackNode)));
   newNode->value = value;
   newNode->next = *root;

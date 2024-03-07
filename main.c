@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "structures.c"
+#include <stddef.h>
+#include "structures.h"
 #include "sorting.c"
 #include "filemgmt.c"
 
 int main(){
-  struct StackNode* stack = NULL;
-  push(&stack, 10);
-  push(&stack, 1000);
-  printf("%d",peek(stack));
-  return 0;
+  struct StackNode* stack = convertToFileStack("test.txt");
+  while(stack != NULL){
+    printf("%d", pop(&stack));
+  }
+  return 1;
 }
