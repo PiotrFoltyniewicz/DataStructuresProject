@@ -1,12 +1,16 @@
-#ifndef structures
-#define structures
+#ifndef structures_hpp
+#define structures_hpp
 
-#include "structures.c"
+class Stack
+{
+  private:
+    struct Node;
+    Node *topNode;
+  public:
+    void push(int value);
+    bool isEmpty();
+    int pop();
+    int peek();
+};
 
-void push(struct StackNode** root, int value);
-
-int pop(struct StackNode** root);
-
-int peek(struct StackNode* root);
-
-#endif structures
+#endif
