@@ -1,8 +1,13 @@
 #include <stdio.h>
-#include "structures.h"
-#include "sorting.h"
+#include <stdlib.h>
+#include "structures.c"
+#include "sorting.c"
+#include "filemgmt.c"
 
 int main(){
-  printf("Hello world");
+  struct StackNode* stack = NULL;
+  push(&stack, 10);
+  push(&stack, 1000);
+  printf("%d",peek(stack));
   return 0;
 }
