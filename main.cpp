@@ -1,11 +1,17 @@
 #include <iostream>
 #include "structures.cpp"
+#include "filemgmt.cpp"
 
 int main()
 {
-  Stack stack = Stack();
-  stack.push(10);
-  std::cout << stack.pop() << '\n';
-  std::cout << stack.pop() << '\n';
+  if (validateText("test.txt"))
+  {
+    std::cout << "Valid";
+  }
+  else
+  {
+    std::cout << "Not valid";
+  }
+
   return 1;
 }
