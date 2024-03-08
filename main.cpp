@@ -1,9 +1,11 @@
 #include <iostream>
-#include "structures.h"
+#include "structures.cpp"
 
-int main(){
-  Stack* stack = new Stack;
-  stack->push(10);
-  std::cout << stack->pop(); 
+int main()
+{
+  Stack stack = Stack();
+  stack.push(10);
+  std::cout << stack.pop() << '\n';
+  std::cout << stack.pop() << '\n';
   return 1;
 }

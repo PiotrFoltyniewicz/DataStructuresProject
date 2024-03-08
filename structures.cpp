@@ -1,22 +1,33 @@
-#include "structures.h"
+#ifndef structures_cpp
+#define structures_cpp
 
-struct Stack::Node{
+class Stack
+{
+private:
+  struct Node
+  {
     int value;
     Node *next = nullptr;
   };
+  Node *topNode;
 
-  void Stack::push(int value){
-    Node* newNode = new Node;
+public:
+  void push(int value)
+  {
+    Node *newNode = new Node;
     newNode->value = value;
     newNode->next = topNode;
     topNode = newNode;
   }
-  bool Stack::isEmpty(){
+  bool isEmpty()
+  {
     return !Stack::topNode;
   }
-  int Stack::pop(){
-    if(isEmpty()){
-      return NULL;
+  int pop()
+  {
+    if (isEmpty())
+    {
+      return -1;
     }
     Node *temp = topNode;
     topNode = topNode->next;
@@ -24,9 +35,14 @@ struct Stack::Node{
     delete temp;
     return poppedValue;
   }
-  int Stack::peek(){
-    if(isEmpty()){
-      return NULL;
+  int peek()
+  {
+    if (isEmpty())
+    {
+      return -1;
     }
     return topNode->value;
   }
+};
+
+#endif
