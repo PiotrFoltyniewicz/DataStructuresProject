@@ -12,7 +12,6 @@ bool validateText(std::string filename)
     file.open(filename, std::ios::in);
     if (file.bad())
     {
-        std::cout << "Bad";
         return false;
     }
     Stack<char> stack = Stack<char>();
@@ -38,6 +37,14 @@ bool validateText(std::string filename)
         return true;
     }
     return false;
+}
+
+Tree<std::string> textToTree(std::string filename)
+{
+}
+
+void treeToHTML(Tree<std::string> tree)
+{
 }
 
 #endif

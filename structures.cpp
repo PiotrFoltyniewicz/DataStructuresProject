@@ -1,6 +1,8 @@
 #ifndef structures_cpp
 #define structures_cpp
 
+#include <stdexcept>
+
 template <typename T>
 class Stack
 {
@@ -102,47 +104,139 @@ public:
 };
 
 template <typename T>
+class LinkedList
+{
+private:
+  struct Node
+  {
+    T value;
+    Node *next;
+  };
+  Node *start;
+
+public:
+  void push(T value)
+  {
+
+    Node *newNode = new Node;
+    newNode->value = value;
+    Node *temp = start;
+
+    if (start == nullptr)
+    {
+      start = newNode;
+    }
+    else
+    {
+      while (temp->next != nullptr)
+      {
+        temp = temp->next;
+      }
+      temp->next = newNode;
+    }
+  }
+  void insert(int index, T value)
+  {
+    int i = 0;
+    Node *newNode = new Node;
+    newNode->value = value;
+    Node *temp = start;
+    Node *current = nullptr;
+
+    if (start == nullptr)
+    {
+      start = newNode;
+      return;
+    }
+
+    while (temp != nullptr && i < index)
+    {
+      temp = temp->next;
+      i++;
+    }
+    if (temp == nullptr)
+    {
+      throw std::out_of_range("Index out of range");
+    }
+    current = temp;
+    temp = temp->next;
+    current->next = newNode;
+    newNode->next = temp;
+  }
+  void remove(int index)
+  {
+    int i = 0;
+    Node *temp = start;
+    Node *current = nullptr;
+    if (start == nullptr)
+    {
+      throw std::out_of_range("Index out of range");
+    }
+    else if (index == 0 && start != nullptr)
+    {
+      delete temp;
+      start = nullptr;
+      return;
+    }
+    else
+    {
+      while (i < index && temp->next != nullptr)
+      {
+        if (i + 1 == index)
+        {
+          current = temp;
+          temp = temp->next;
+          current->next = temp->next;
+          delete temp;
+          return;
+        }
+        temp = temp->next;
+        i++;
+      }
+    }
+    throw std::out_of_range("Index out of range");
+  }
+  int length()
+  {
+    Node *temp = start;
+    int length = 0;
+    while (temp != nullptr)
+    {
+      length++;
+      temp = temp->next;
+    }
+    return length;
+  }
+  bool isEmpty()
+  {
+    return !start;
+  }
+};
+
+template <typename T>
 class Tree
 {
 private:
   struct Node
   {
     T value;
-    Node *next = nullptr;
+    Node *parent;
+    LinkedList<T> children = LinkedList<T>();
   };
-  Node *topNode;
+  Node *root;
 
 public:
-  void push(T value)
+  void addChild(Node *parentNode, T value)
   {
     Node *newNode = new Node;
     newNode->value = value;
-    newNode->next = topNode;
-    topNode = newNode;
-  }
-  bool isEmpty()
-  {
-    return !topNode;
-  }
-  T pop()
-  {
-    if (isEmpty())
+    if (parentNode = nullptr)
     {
-      return -1;
+      parentNode = newNode;
+      return;
     }
-    Node *temp = topNode;
-    topNode = topNode->next;
-    T poppedValue = temp->value;
-    delete temp;
-    return poppedValue;
-  }
-  T peek()
-  {
-    if (isEmpty())
-    {
-      return -1;
-    }
-    return topNode->value;
+    newNode->parent = parentNode;
+    parentNode->children.push(newNode);
   }
 };
 
