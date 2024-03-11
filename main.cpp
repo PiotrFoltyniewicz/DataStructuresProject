@@ -1,9 +1,17 @@
 #include <iostream>
-#include "structures.h"
+#include "structures.cpp"
+#include "filemgmt.cpp"
 
-int main(){
-  Stack* stack = new Stack;
-  stack->push(10);
-  std::cout << stack->pop(); 
+int main()
+{
+  if (validateText("test.txt"))
+  {
+    std::cout << "Valid";
+  }
+  else
+  {
+    std::cout << "Not valid";
+  }
+
   return 1;
 }
