@@ -4,14 +4,16 @@
 
 int main()
 {
+
   if (validateText("test.txt"))
   {
-    std::cout << "Valid";
+    std::cout << "Valid\n";
+    Tree<int> tree = textToTree("test.txt");
+    tree.printTree();
   }
   else
   {
-    std::cout << "Not valid";
+    std::cout << "Not valid\n";
   }
-
   return 1;
 }

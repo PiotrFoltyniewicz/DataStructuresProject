@@ -2,6 +2,8 @@
 #define structures_cpp
 
 #include <stdexcept>
+#include <iostream>
+#include <vector>
 
 template <typename T>
 class Stack
@@ -211,32 +213,68 @@ public:
   {
     return !start;
   }
+  Node *peek()
+  {
+    Node *temp = start;
+    while (temp->next != nullptr)
+    {
+      temp = temp->next;
+    }
+    return temp;
+  }
 };
 
 template <typename T>
 class Tree
 {
 private:
+public:
   struct Node
   {
     T value;
-    Node *parent;
-    LinkedList<T> children = LinkedList<T>();
+    Node *parent = nullptr;
+    std::vector<Node *> children = {};
   };
-  Node *root;
-
-public:
-  void addChild(Node *parentNode, T value)
+  Node *root = nullptr;
+  Node *addChild(Node *parentNode, T value)
   {
     Node *newNode = new Node;
     newNode->value = value;
-    if (parentNode = nullptr)
+    if (parentNode == nullptr)
     {
-      parentNode = newNode;
-      return;
+      root = newNode;
+      return root;
     }
     newNode->parent = parentNode;
-    parentNode->children.push(newNode);
+    parentNode->children.push_back(newNode);
+    return newNode;
+  }
+
+  void printSubtree(Node *node, int depth)
+  {
+    if (node == nullptr)
+      return;
+
+    for (int i = 0; i < depth; ++i)
+      std::cout << "  ";
+    std::cout << node->value << std::endl;
+
+    for (Node *child : node->children)
+    {
+      printSubtree(child, depth + 1);
+    }
+  }
+
+  void printTree()
+  {
+    if (root == nullptr)
+    {
+      std::cout << "Tree is empty." << std::endl;
+      return;
+    }
+
+    std::cout << "Tree Contents:" << std::endl;
+    printSubtree(root, 0);
   }
 };
 
