@@ -7,13 +7,14 @@ int main()
 
   if (validateText("test.txt"))
   {
-    std::cout << "Valid\n";
+    std::cout << "File is valid\n";
     Tree<int> tree = textToTree("test.txt");
     tree.printTree();
+    treeToHTML(tree, "test.html");
   }
   else
   {
-    std::cout << "Not valid\n";
+    std::cout << "File is not valid\n";
   }
   return 1;
 }

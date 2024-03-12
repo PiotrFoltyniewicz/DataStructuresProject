@@ -257,7 +257,7 @@ public:
 
     for (int i = 0; i < depth; ++i)
       std::cout << "  ";
-    std::cout << node->value << std::endl;
+    std::cout << node->value << '\n';
 
     for (Node *child : node->children)
     {
@@ -269,11 +269,10 @@ public:
   {
     if (root == nullptr)
     {
-      std::cout << "Tree is empty." << std::endl;
+      std::cout << "Tree is empty" << '\n';
       return;
     }
 
-    std::cout << "Tree Contents:" << std::endl;
     printSubtree(root, 0);
   }
 };
